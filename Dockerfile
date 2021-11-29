@@ -15,18 +15,21 @@ RUN set -xe; \
 	mkdir -p /var/www/docroot; \
 	cp -R /usr/share/nginx/html/. /var/www/docroot
 
-ARG GOMPLATE_VERSION=3.0.0
+ARG GOMPLATE_VERSION=3.10.0
 
 # Install gomplate
-RUN set -xe; \
-	apk add --no-cache -t .fetch-deps \
-		curl \
-	; \
-	curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64-slim -o /usr/local/bin/gomplate; \
-	chmod +x /usr/local/bin/gomplate; \
-	\
-	apk del --purge .fetch-deps; \
-	rm -rf /var/cache/apk/*
+# RUN set -xe; \
+# 	apk add --no-cache -t .fetch-deps \
+# 		curl \
+# 	; \
+# 	curl -sSL https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64-slim -o /usr/local/bin/gomplate; \
+# 	chmod +x /usr/local/bin/gomplate; \
+# 	\
+# 	apk del --purge .fetch-deps; \
+# 	rm -rf /var/cache/apk/*
+COPY gomplate_linux-amd64-slim-2 /usr/local/bin/gomplate
+RUN chmod +x /usr/local/bin/gomplate;
+
 
 COPY conf /etc/nginx/
 COPY docker-entrypoint.d /etc/docker-entrypoint.d/

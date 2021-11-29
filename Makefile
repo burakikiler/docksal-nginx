@@ -1,12 +1,12 @@
 -include tests/env_make
 
-FROM ?= nginx:1.15.7-alpine
-VERSION ?= 1.15
+FROM ?= nginx:1.21.3-alpine
+VERSION ?= 1.21
 
 BUILD_TAG ?= $(VERSION)
 SOFTWARE_VERSION ?= $(VERSION)
 
-REPO ?= docksal/nginx
+REPO ?= burakikiler/nginx
 NAME ?= docksal-nginx-$(VERSION)
 
 .EXPORT_ALL_VARIABLES:
